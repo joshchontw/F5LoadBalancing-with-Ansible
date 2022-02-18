@@ -1,0 +1,16 @@
+---
+- name: Creating a pool with two nodes
+  hosts: lb
+  connection: local
+
+  tasks:
+     - name: Adding pool
+       f5networks.f5_modules.bigip_pool:
+         name: "webservers"
+         lb_method: "round-robin"
+         provider:
+           server: "172.29.224.100"
+           user: "{{ ansible_user }}"
+           password: "{{ ansible_ssh_pass }}"
+           validate_certs: no
+         

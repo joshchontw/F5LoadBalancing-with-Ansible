@@ -1,0 +1,17 @@
+---
+- name: Adding nodes to pool
+  hosts: lb
+  connection: local
+
+  tasks:
+     - name: Adding nodes
+       f5networks.f5_modules.bigip_pool_member:
+         pool: "webservers"
+         host: "192.168.122.244"
+         port: 80
+         provider:
+           server: "172.29.224.100"
+           user: "{{ ansible_user }}"
+           password: "{{ ansible_ssh_pass }}"
+           validate_certs: no
+         
