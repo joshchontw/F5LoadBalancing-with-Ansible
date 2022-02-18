@@ -1,0 +1,25 @@
+---
+- name: Gathering information about the load balancer
+  hosts: lb
+  connection: local
+
+  tasks:
+     - name: Gather information
+       f5networks.f5_modules.bigip_device_info:
+         gather_subset: 
+            - devices
+            - ltm-pools
+            - nodes
+            - self-ips
+            - virtual-servers
+         provider:
+           server: "172.29.224.100"
+           user: "{{ ansible_user }}"
+           password: "{{ ansible_ssh_pass }}"
+           validate_certs: no
+       register: configuration
+      
+     - name: Display information
+       debug: 
+         var: configuration
+         
