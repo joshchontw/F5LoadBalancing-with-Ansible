@@ -1,13 +1,12 @@
 ---
-- name: Creating two nodes
+- name: Changing hostname of the device
   hosts: lb
   connection: local
 
   tasks:
-     - name: Adding two nodes to system
-       f5networks.f5_modules.bigip_node:
-         name: "192.168.122.241"
-         host: 192.168.122.241
+     - name: Changing hostname
+       f5networks.f5_modules.bigip_hostname:
+         hostname: jaeouks.f5bigip.localdomain
          provider:
            server: "172.29.224.100"
            user: "{{ ansible_user }}"

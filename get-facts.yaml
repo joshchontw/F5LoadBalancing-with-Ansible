@@ -7,7 +7,6 @@
      - name: Gather information
        f5networks.f5_modules.bigip_device_info:
          gather_subset: 
-            - devices
             - ltm-pools
             - nodes
             - self-ips
@@ -18,8 +17,9 @@
            password: "{{ ansible_ssh_pass }}"
            validate_certs: no
        register: configuration
-      
-     - name: Display information
-       debug: 
-         var: configuration
+
+     - name: Save facts to file 
+       copy: 
+         content: "{{ configuration | to_nice_json }}"
+         dest: /mnt/c/Users/JoshC/Desktop/SDN/F5LoadBalancing-with-Ansible/F5facts
          
