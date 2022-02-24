@@ -30,9 +30,9 @@
 #### [Creating virtual server](https://github.com/joshchontw/Lab2-F5LoadBalancing-with-Ansible/blob/main/playbooks/create-virtual-server.yaml)
 ![image](https://user-images.githubusercontent.com/81763406/155574215-cdd03704-5f15-4da8-9d07-68c291ae7c36.png)
 
-> The module 'f5networks.f5_modules.bigip_virtual_server' allows us to create a virtual server. In essence, the virtual server is the virtual IP that clients connect to, and the load balancer picks it up from there to direct traffic to pool members based on a pre-defined method (eg. round robin, least connection, etc).
+> The module 'f5networks.f5_modules.bigip_virtual_server' allows us to create a virtual server. In essence, the virtual server is the virtual IP that clients connect to, and the load balancer picks it up from there to direct traffic to pool members based on a pre-defined method (eg. round robin, least connection, etc). The 'destination' key is the virtual IP that clients will connect to. 'port' is the port that clients connect to. In our case, we have HTTP web servers, so the port is 80. We have to associate our virtual IP with a pool that it will service, and we provide the pool we've created. The final value to provide is the type of network address translation we want applied to our client. 'Automap' translates the client IP to an IP of the egress VLAN heading toward the servers.
 ---
 #### [Retrieving device facts](https://github.com/joshchontw/Lab2-F5LoadBalancing-with-Ansible/blob/main/playbooks/get-facts.yaml)
 ![image](https://user-images.githubusercontent.com/81763406/155582062-8ee1f608-c5a2-4b16-a962-15bc5217fcf4.png)
 
-> The module 'f5networks.f5_modules.bigip_device_info'
+> The module 'f5networks.f5_modules.bigip_device_info' allows us to gather information about how the device is configured. Under the 'gather_subset' key, we can specify specific parts of the configuration that we want to see. Using the 'register' construct, we can save the output to a variable. The next task in the playbook is to transfer the output variable to a file, using the 'copy' module. We must specify the content, and we bring in the variable we saved earlier ('configuration'). The filter 'to_nice_json' makes sure the output is in a human readable format. The 'dest' key points the agent to where twe want the file saved. The facts file is called 'F5facts'.
