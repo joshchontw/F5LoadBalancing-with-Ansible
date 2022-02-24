@@ -1,4 +1,4 @@
-# F5LoadBalancing-with-Ansible
+# F5 Load Balancing with Ansible
 ## Topology
 
 #### My lab consists of an F5 BIG IP load balancer with two web servers sitting behind it. A client machine will be making HTTP requests to the virtual IP address of the load balancer, and it will distribute those requests round-robin style to the two web servers. Each of the connections (client machine - load balancer, load balancer - web servers, load balancer - Ansible agent) is on their own network. 
